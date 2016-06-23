@@ -1,0 +1,47 @@
+/* help styles */
+
+h1 {
+	font-size: 18px;
+	text-transform: uppercase;
+	border-top: 1px solid #ccc;
+	padding: 5px 0 0 0;
+}
+
+div.test {
+  background: #fff;
+}
+
+div.test p {
+  color: white;
+	background: red;
+  font-size: 12px;
+	display: none;
+}
+
+
+/* test case below */
+
+div.test-1 p,
+div.test-3 p {
+	display: block;
+}
+div.test-1 p {
+  font-size: 12px;
+	/* notice if you uncomment font-family below test will fail - meaning texts will display, because 12px font will be 'cached' ? */
+/*font-family: 'MyCustomFont', sans-serif;*/
+}
+div.test-2 p {
+  font-family: 'MyCustomFont', sans-serif;
+  font-size: 12px;
+}
+
+/* here in test 3 and 4 Fjalla will display for because it's cached in 3 */
+div.test-3 p {
+  font-size: 16px;
+  font-family: 'MyCustomFont', sans-serif;
+}
+
+div.test-4 p {
+  font-family: 'MyCustomFont', sans-serif;
+  font-size: 16px;
+}

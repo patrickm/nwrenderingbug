@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url("/fonts/impact/impact.eot");
+  src: url("/fonts/impact/impact.eot?#iefix") format('embedded-opentype'), url('/fonts/impact/impact.woff') format('woff'), url('/fonts/impact/impact.ttf') format('truetype'), url('/fonts/impact/impact.svg') format('svg');
+}

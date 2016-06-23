@@ -1,0 +1,9 @@
+{
+  "name": "nwjs-rendering-bug",
+  "app-id": "io.nwjs.renderingbug",
+  "main": "index.html",
+  "window": {
+    "width": 800,
+    "height": 600
+  }
+}
