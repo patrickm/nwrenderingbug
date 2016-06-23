@@ -4,14 +4,24 @@
 	<title>NW Fonts Rendering Bug</title>
 	<meta charset="utf-8">
 	
-	<link rel="stylesheet" type="text/css" href="/fonts.css">
-	<link rel="stylesheet" type="text/css" href="/main.css">
+	<link rel="stylesheet" type="text/css" href="fonts.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 	<script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function(event) {
+		var isNw = typeof nw !== 'undefined';
+		var openWindow = function(url, callback) {
+			if (isNw) {
+				nw.Window.open(url, {}, callback);
+			} else {
+				window.open(url);
+				setTimeout(callback, 300);
+			}
+		};
+		
 		var runTest = function(windowFile) {
 			document.querySelector('div.intro').style.display = 'none';
 			document.querySelector('div.outro').style.display = 'block';
-			nw.Window.open('/' + windowFile + '.html', {frame:false}, function(appWin) {
+			openWindow(windowFile + '.html', function(appWin) {
 				setTimeout(function() {
 					if (appWin) {
 						appWin.close();
@@ -33,7 +43,11 @@
 		});
 		document.querySelector('a.restart').addEventListener('click', function(evt) {
 			evt.preventDefault();
-			chrome.runtime.reload();
+			if (isNw) {
+				chrome.runtime.reload();
+			} else {
+				window.location = window.location;
+			}
 		});
 	});
 	</script>
@@ -44,13 +58,13 @@
 		<div class="intro">
 			<ol>
 				<li>In red boxes white text should be visible with custom font.</li>
-				<li>Tests 1 and 3 display that text right away, where tests 2 and 4 display it after opening a frameless window</li>
-				<li>If you open a frameless window with the same css (with fonts) used for this page red box text in TEST 2 won't be visible</li>
-				<li>To fail (not display text) custom font needs to be set on some element that's visible before opening frameless window (font-size must match too)</li>
+				<li>Tests 1 and 3 display that text right away, where tests 2 and 4 display it after opening a window</li>
+				<li>If you open a window with the same css (with fonts) used for this page red box text in TEST 2 won't be visible</li>
+				<li>To fail (not display text) custom font needs to be set on some element that's visible before opening a window (font-size must match too)</li>
 				<li>The only thing we're doing here is:
 					<ol>
-						<li>main page: load fonts.css, add custom font-family to some element that's visible, open frameless window</li>
-						<li>frameless window: load fonts.css</li>
+						<li>main page: load fonts.css, add custom font-family to some element that's visible, open window</li>
+						<li>window: load fonts.css</li>
 						<li>main page: unhide/add-new element with the same custom font</li>
 					</ol>
 				</li>

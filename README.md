@@ -11,8 +11,8 @@ Site uses custom fonts via @font-face.
 
 Set custom font to h1 and h2, hide h2.
 
-Open a frameless window with css that has the same @font-
-face declarations.
+Open a window with css that has the same @font-face declarations.
+> frame:false or true 
 
 Show h2, h2 text won't be visible unless you toggle some css in devtools.
 
